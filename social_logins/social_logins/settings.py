@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from os import environ
+from dotenv import load_dotenv
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-v(u@sl%z(a2!1vfrzm7j85#ka4*p0x#!=a0lmu2(jpf=!#^yun'
+SECRET_KEY = environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -121,3 +126,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'accounts.User'
+
+# Google credentis
+GOOGLE_CLIENT_ID = environ['GOOGLE_CLIENT_ID']
+GOOGLE_CLIENT_SECRET = environ['GOOGLE_CLIENT_SECRET']
+GOOGLE_REDIRECT_URI = environ['GOOGLE_REDIRECT_URI']
+GOOGLE_ATUH_TOKEN_URL = environ['GOOGLE_ATUH_TOKEN_URL']
+GOOGLE_USER_INFO_URL = environ['GOOGLE_USER_INFO_URL']
