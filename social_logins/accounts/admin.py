@@ -15,7 +15,7 @@ class UserAdmin(admin.ModelAdmin):
     ordering = ("date_joined",)
     fieldsets = (
         ("User", {
-            "fields": ("email", "password")
+            "fields": ("email", "password", "username")
         }),
         ("Personal info", {
             "fields": ("first_name", "last_name")
