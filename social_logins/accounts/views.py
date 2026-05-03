@@ -8,7 +8,7 @@ from rest_framework.response import Response
 
 from accounts.serializers import LoginSerializer
 from accounts.models import User
-from accounts.functions import Google, Meta
+from accounts.functions import Google, Meta, Microsoft
 
 class Login(APIView):
     """
@@ -23,7 +23,8 @@ class Login(APIView):
 
         providers = {
             LoginSerializer.PROVIDER_GOOGLE: Google,
-            LoginSerializer.PROVIDER_META: Meta
+            LoginSerializer.PROVIDER_META: Meta,
+            LoginSerializer.PROVIDER_MICROSOFT: Microsoft
         }
         provider_obj = providers[serializer.validated_data['provider']]()
         try:
