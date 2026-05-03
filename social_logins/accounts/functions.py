@@ -57,3 +57,32 @@ class Meta:
         )
         response.raise_for_status()
         return response.json()
+
+
+class Microsoft:
+    def get_access_token(self, code):
+        paraterms = {
+            "client_id": settings.MICROSOFT_CLIENT_ID,
+            "scope": "User.Read User.Read.All profile openid email",
+            "client_secret": settings.MICROSOFT_CLIENT_SECRET,
+            "redirect_uri": settings.MICROSOFT_REDIRECT_URI,
+            "code": code,
+            "grant_type": "authorization_code"
+        }
+        response = requests.post(
+            settings.MICROSOFT_AUTH_TOKEN_URL,
+            params=paraterms
+        )
+        response.raise_for_status()
+        return response.json()['access_token']
+
+    def get_user_data(self, access_token):
+        headers = {
+            "Authorization": f"Bearer {access_token}"
+        }
+        response = requests.get(
+            settings.MICROSOFT_USER_INFO_URL,
+            headers=headers
+        )
+        response.raise_for_status()
+        return response.json()

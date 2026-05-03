@@ -7,6 +7,7 @@ class LoginSerializer(serializers.Serializer):
     """
     PROVIDER_GOOGLE = 'google'
     PROVIDER_META = 'meta'
+    PROVIDER_MICROSOFT = 'microsoft'
     code = serializers.CharField(
         error_messages={
             'required': 'The `code` field is required.',
